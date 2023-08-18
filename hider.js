@@ -49,5 +49,13 @@ async function obfuscateFile(filePath, saveToPath){
 async function obfuscateDirectory(dirPath, oldSaveToPath){
     let newSaveToPath = oldSaveToPath + "/" + basename(dirPath) + "_obfuscated";
     fs.mkdirSync(newSaveToPath);
-        //WIP
+    fs.readdirSync(dirPath).forEach(async (file) => {
+        if (file.endsWith(".js")) {
+            obfuscateFile(dirPath + "/" + file, newSaveToPath);
+        } else {
+            if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+                obfuscateDirectory(dirPath + "/" + file, newSaveToPath);
+            }
+        }
+    });
 }
