@@ -8,7 +8,7 @@ function basename(path) {
 
 (async ()=>{
     if (process.argv.length < 3) {
-        console.log("no starting point provided");
+        console.log("no path provided");
         return;
     }
     const moveFrom = process.argv[2];
@@ -21,7 +21,7 @@ function basename(path) {
         if (moveFrom.endsWith(".js")) {
             obfuscateFile(moveFrom, saveToPath)
         } else {
-            console.log("not a js file");
+            console.log("not a .js file");
         }
         return;
     }
@@ -34,7 +34,7 @@ function basename(path) {
 
 function obfuscateText(fileText){
     var obfuscationResult = JavaScriptObfuscator.obfuscate(fileText,{
-            compact: false,
+            compact: true,
             controlFlowFlattening: true,
             controlFlowFlatteningThreshold: 1,
             numbersToExpressions: true,
