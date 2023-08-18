@@ -23,6 +23,8 @@ function basename(path) {
         }
     } else if (fs.statSync(moveFrom).isDirectory()) {
         obfuscateDirectory(moveFrom, saveToPath);
+    } else {
+        console.log("unknown file type");
     }
 })();
 
