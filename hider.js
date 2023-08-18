@@ -15,15 +15,13 @@ function basename(path) {
     const saveToPath = process.cwd();
     if (!fs.existsSync(moveFrom)) {
         console.log("unknown path ", moveFrom);
-    }
-    else if (fs.statSync(moveFrom).isFile()) {
+    } else if (fs.statSync(moveFrom).isFile()) {
         if (moveFrom.endsWith(".js")) {
             obfuscateFile(moveFrom, saveToPath);
         } else {
             console.log("not a .js file");
         }
-    }
-    else if (fs.statSync(moveFrom).isDirectory()) {
+    } else if (fs.statSync(moveFrom).isDirectory()) {
         obfuscateDirectory(moveFrom, saveToPath);
     }
 })();
