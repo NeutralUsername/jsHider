@@ -43,11 +43,11 @@ function obfuscateText(fileText){
 }
 
 async function obfuscateFile(filePath, saveToPath){
-    fs.writeFileSync(saveToPath + "/" + basename(filePath).replace(".js", "_obfuscated.js"), obfuscateText(await readFile(filePath, 'utf8')));
+    fs.writeFileSync(saveToPath + "/" + basename(filePath), obfuscateText(await readFile(filePath, 'utf8')));
 }
 
 async function obfuscateDirectory(dirPath, oldSaveToPath){
-    let newSaveToPath = oldSaveToPath + "/" + basename(dirPath) + "_obfuscated";
+    let newSaveToPath = oldSaveToPath + "/" + basename(dirPath);
     fs.mkdirSync(newSaveToPath);
     fs.readdirSync(dirPath).forEach(async (file) => {
         if (file[0] == ".") return;
