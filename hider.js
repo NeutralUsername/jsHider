@@ -7,8 +7,9 @@ var fs = require("fs");
         console.log("no path provided");
         return;
     }
-    const moveFrom = process.argv[2];
-    const saveToPath = process.cwd();
+    let moveFrom = process.argv[2];
+    if (moveFrom[moveFrom.length - 1] == "/") moveFrom = moveFrom.slice(0, -1);
+    let saveToPath = process.cwd();
     if (!fs.existsSync(moveFrom)) {
         console.log("unknown path ", moveFrom);
     } else if (fs.statSync(moveFrom).isFile()) {
