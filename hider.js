@@ -15,39 +15,35 @@ function basename(path) {
     const saveToPath = process.cwd();
     if (!fs.existsSync(moveFrom)) {
         console.log("unknown path ", moveFrom);
-        return;
     }
-    if (fs.statSync(moveFrom).isFile()) {
+    else if (fs.statSync(moveFrom).isFile()) {
         if (moveFrom.endsWith(".js")) {
-            obfuscateFile(moveFrom, saveToPath)
+            obfuscateFile(moveFrom, saveToPath);
         } else {
             console.log("not a .js file");
         }
-        return;
     }
-    if (fs.statSync(moveFrom).isDirectory()) {
+    else if (fs.statSync(moveFrom).isDirectory()) {
         obfuscateDirectory(moveFrom, saveToPath);
-        return;
     }
 })();
 
 
-function obfuscateText(fileText){
-    var obfuscationResult = JavaScriptObfuscator.obfuscate(fileText,{
-            compact: true,
-            controlFlowFlattening: true,
-            controlFlowFlatteningThreshold: 1,
-            numbersToExpressions: true,
-            simplify: true,
-            stringArrayShuffle: true,
-            splitStrings: true,
-            stringArrayThreshold: 1
-        });
-    return obfuscationResult.getObfuscatedCode();
+function obfuscateJsCode(jsCode){
+    return JavaScriptObfuscator.obfuscate(jsCode, {
+        compact: true,
+        controlFlowFlattening: true,
+        controlFlowFlatteningThreshold: 1,
+        numbersToExpressions: true,
+        simplify: true,
+        stringArrayShuffle: true,
+        splitStrings: true,
+        stringArrayThreshold: 1
+    }).getObfuscatedCode();
 }
 
 async function obfuscateFile(filePath, saveToPath){
-    fs.writeFileSync(saveToPath + "/" + basename(filePath), obfuscateText(await readFile(filePath, 'utf8')));
+    fs.writeFileSync(saveToPath + "/" + basename(filePath), obfuscateJsCode(await readFile(filePath, 'utf8')));
 }
 
 async function obfuscateDirectory(dirPath, oldSaveToPath){
