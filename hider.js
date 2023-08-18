@@ -18,7 +18,11 @@ function basename(path) {
         return;
     }
     if (fs.statSync(moveFrom).isFile()) {
-        obfuscateFile(moveFrom, saveToPath)
+        if (moveFrom.endsWith(".js")) {
+            obfuscateFile(moveFrom, saveToPath)
+        } else {
+            console.log("not a js file");
+        }
         return;
     }
     if (fs.statSync(moveFrom).isDirectory()) {
