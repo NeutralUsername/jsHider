@@ -14,7 +14,7 @@ function basename(path) {
     const moveFrom = process.argv[2];
     const saveToPath = process.cwd();
     if (!fs.existsSync(moveFrom)) {
-        console.log("no dir ", moveFrom);
+        console.log("unknown path ", moveFrom);
         return;
     }
     if (fs.statSync(moveFrom).isFile()) {
