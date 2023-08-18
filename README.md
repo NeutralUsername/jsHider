@@ -1,4 +1,4 @@
-simple node.js app that recursively obfuscates all ".js" files in the provided path and copies it to the current working directory
+simple node.js app that recursively obfuscates and copies all ".js" files from the provided path into the current working directory
 
 usage (linux):  
 -install node.js  
