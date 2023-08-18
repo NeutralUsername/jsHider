@@ -50,6 +50,8 @@ async function obfuscateDirectory(dirPath, oldSaveToPath){
             obfuscateFile(dirPath + "/" + file, newSaveToPath);
         } else if (fs.statSync(dirPath + "/" + file).isDirectory()) {
             obfuscateDirectory(dirPath + "/" + file, newSaveToPath);
+        } else {
+            fs.copyFileSync(dirPath + "/" + file, newSaveToPath + "/" + file);
         }
     });
 }
