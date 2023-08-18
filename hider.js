@@ -2,10 +2,6 @@ var JavaScriptObfuscator = require('javascript-obfuscator');
 const { readFile } = require('fs/promises');
 var fs = require("fs");
 
-function basename(path) {
-    return path.split('/').reverse()[0];
- }
-
 (async ()=>{
     if (process.argv.length < 3) {
         console.log("no path provided");
@@ -56,4 +52,8 @@ async function obfuscateDirectory(dirPath, oldSaveToPath){
             obfuscateDirectory(dirPath + "/" + file, newSaveToPath);
         }
     });
+}
+
+function basename(path) {
+    return path.split('/').reverse()[0];
 }
