@@ -26,7 +26,6 @@ function basename(path) {
     }
 })();
 
-
 function obfuscateJsCode(jsCode){
     return JavaScriptObfuscator.obfuscate(jsCode, {
         compact: true,
